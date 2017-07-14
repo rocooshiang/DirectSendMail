@@ -1,10 +1,7 @@
 # DirectSendMail
 
-Features
--------------
+* 記得去系統設定將監聽Notification權限打開
 
 
-		1.Use broadcastreceiver receive SMS and writing to sqlite
-        2.When you open or shutdown cellphone , broadcastreceiver receive message trigger direct send mail (Sometimes fail)
 
-        
+        
