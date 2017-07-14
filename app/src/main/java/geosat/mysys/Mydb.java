@@ -22,7 +22,7 @@ public class Mydb extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String strSql = "CREATE TABLE SmsInfo (_id INTEGER PRIMARY KEY,Phone Text,Body Text,Time Text); ";
+        String strSql = "CREATE TABLE SmsInfo (_id INTEGER PRIMARY KEY,FromWho Text,Body Text,Time Text); ";
         db.execSQL(strSql);
     }
 
@@ -51,6 +51,7 @@ public class Mydb extends SQLiteOpenHelper {
                 }
             }
         } catch (Exception e) {
+
         }
     }
 

