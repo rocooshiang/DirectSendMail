@@ -42,8 +42,7 @@ public class Mydb extends SQLiteOpenHelper {
             if (cursor1.moveToNext()) {
                 int count = cursor1.getInt(0);
                 if (count == 0) {
-                    // String
-                    // strSql="CREATE TABLE '"+TableName+"' (facnumber Text, userName Text, report Text, reportDate NUMERIC, adminZone Text, uploaddate NUMERIC, isupload INTEGER, _id INTEGER PRIMARY KEY, factype Text);";
+                    // String                    
                     String strSql = "CREATE TABLE " + TableName + " " + ColName
                             + ";";
                     db.execSQL(strSql);

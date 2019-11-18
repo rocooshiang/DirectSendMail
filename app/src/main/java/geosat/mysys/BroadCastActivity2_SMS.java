@@ -64,22 +64,19 @@ public class BroadCastActivity2_SMS extends AppCompatActivity {
 
     public void deleteSMS(Context context, String message, String number) {
         try {
-            Log.d("rocoo", "delete sms");
             Uri uriSms = Uri.parse("content://sms/inbox");
             Cursor c = context.getContentResolver().query(uriSms,
                     new String[]{"_id", "thread_id", "address",
                             "person", "date", "body"}, null, null, null);
 
             if (c != null && c.moveToFirst()) {
-                Log.d("rocoo", "delete sms2");
                 do {
                     long id = c.getLong(0);
                     long threadId = c.getLong(1);
                     String address = c.getString(2);
                     String body = c.getString(5);
 
-                    if (message.equals(body) && address.equals(number)) {
-                        Log.d("rocoo", "delete sms3");
+                    if (message.equals(body) && address.equals(number)) {                        
                         context.getContentResolver().delete(
                                 Uri.parse("content://sms/" + id), null, null);
                     }
