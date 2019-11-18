@@ -53,7 +53,7 @@ public class SmsService  extends Service{
                 try {
                     //
                     Log.i("rocoo", "send mail success" );
-                    GMailSender sender = new GMailSender("rocoo.shiang@gmail.com", "abc556624");
+                    GMailSender sender = new GMailSender("rocoo.shiang@gmail.com", "YOUR-PWD");
                     sender.sendMail("My mail",  // 主旨
                             builder.toString(),
                             "rocoo.shiang@gmail.com",      // 寄件人
